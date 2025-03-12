@@ -52,30 +52,39 @@ class AuthController extends Controller
 
     // Xử lý đăng nhập
     public function login(Request $request)
-    {
-        $request->validate([
-            'role' => 'required|in:customer,owner',
-            'login' => 'required', // Email hoặc số điện thoại
-            'password' => 'required'
-        ]);
+{
+    $request->validate([
+        'role' => 'required|in:customer,owner',
+        'login' => 'required', // Email hoặc số điện thoại
+        'password' => 'required'
+    ]);
 
-        $credentials = [
-            'password' => $request->password,
-            'role' => $request->role
-        ];
+    $credentials = [
+        'password' => $request->password,
+        'role' => $request->role
+    ];
 
-        if (filter_var($request->login, FILTER_VALIDATE_EMAIL)) {
-            $credentials['email'] = $request->login;
-        } else {
-            $credentials['phone'] = $request->login;
-        }
-
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('home');
-        }
-
-        return back()->withErrors(['login' => 'Thông tin đăng nhập không chính xác.']);
+    // Kiểm tra nếu login là email hoặc số điện thoại
+    if (filter_var($request->login, FILTER_VALIDATE_EMAIL)) {
+        $credentials['email'] = $request->login;
+    } else {
+        $credentials['phone'] = $request->login;
     }
+
+    if (Auth::attempt($credentials)) {
+        $user = Auth::user();
+
+        // Kiểm tra role và chuyển hướng
+        if ($user->role == 'owner') {
+            return redirect()->route('admin.dashboard'); // Chuyển đến giao diện chủ sân
+        } else {
+            return redirect()->route('home'); // Chuyển đến giao diện khách hàng
+        }
+    }
+
+    return back()->withErrors(['login' => 'Thông tin đăng nhập không chính xác.']);
+}
+
 
     // Xử lý đăng xuất
     public function logout()
