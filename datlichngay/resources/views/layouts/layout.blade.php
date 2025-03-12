@@ -144,6 +144,10 @@
         .scroll-to-top:hover {
             background-color: #8aa8c0;
         }
+
+        .dropdown-menu {
+            z-index: 1050; /* Đảm bảo nó hiển thị trên các phần khác */
+        }
     </style>
 </head>
 <body>
@@ -152,27 +156,22 @@
     <div class="header">
         <div class="logo">Logo</div>
         <div class="header-buttons">
-        <div class="ml-auto">
-            @auth
-                <div class="dropdown">
-                    <a class="btn btn-light dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown">
-                        <i class="fas fa-user"></i> {{ Auth::user()->email }}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Đăng xuất
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <div class="ml-auto">
+                @auth
+                <div class="d-flex align-items-center">
+                    <span class="mr-2"><i class="fas fa-user"></i> {{ Auth::user()->email }}</span>
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
                         @csrf
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
                     </form>
                 </div>
-                </div>
-            @else
-                <a href="{{ route('login') }}" class="btn btn-light">Đăng nhập</a>
-                <a href="{{ route('register') }}" class="btn btn-light">Đăng ký</a>
-            @endauth
-        </div>
-
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-light">Đăng nhập</a>
+                    <a href="{{ route('register') }}" class="btn btn-light">Đăng ký</a>
+                @endauth
+            </div>
         </div>
     </div>
 
@@ -224,10 +223,24 @@
                 btn.style.display = "none";
             }
         };
+
+        // Đóng dropdown khi click ra ngoài
+        $(document).on("click", function (event) {
+            var $trigger = $(".dropdown");
+            if ($trigger !== event.target && !$trigger.has(event.target).length) {
+                $(".dropdown-menu").removeClass("show");
+            }
+        });
+
+        // Hiển thị dropdown đúng cách
+        $("#userDropdown").on("click", function (event) {
+            event.stopPropagation();
+            $(".dropdown-menu").toggleClass("show");
+        });
     </script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- jQuery & Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
