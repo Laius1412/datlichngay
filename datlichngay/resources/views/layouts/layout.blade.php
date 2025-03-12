@@ -152,8 +152,27 @@
     <div class="header">
         <div class="logo">Logo</div>
         <div class="header-buttons">
-            <button class="btn btn-light">Đăng Nhập</button>
-            <a href="{{ route('register') }}" class="btn btn-secondary">Đăng Ký</a>
+        <div class="ml-auto">
+            @auth
+                <div class="dropdown">
+                    <a class="btn btn-light dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown">
+                        <i class="fas fa-user"></i> {{ Auth::user()->email }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Đăng xuất
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+                </div>
+            @else
+                <a href="{{ route('login') }}" class="btn btn-light">Đăng nhập</a>
+                <a href="{{ route('register') }}" class="btn btn-light">Đăng ký</a>
+            @endauth
+        </div>
+
         </div>
     </div>
 
@@ -161,7 +180,7 @@
     <div class="sidebar">
         <div class="logo">LOGO</div>
         <ul class="menu">
-            <li><a href="{{ route('welcome') }}" class="text-light"><i class="fas fa-home"></i> Trang chủ</a></li>
+            <li><a href="{{ url('/') }}" class="text-light"><i class="fas fa-home"></i> Trang chủ</a></li>
             <li><a href="#"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
             <li><a href="#"><i class="fas fa-futbol"></i> Danh sách sân</a></li>
             <li><a href="#"><i class="fas fa-calendar-alt"></i> Quản lý lịch đặt</a></li>
@@ -213,4 +232,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
-</htm
+</htm>

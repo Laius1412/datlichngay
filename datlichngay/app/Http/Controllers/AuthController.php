@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -43,4 +44,44 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Đăng ký thành công, vui lòng đăng nhập!');
     }
 
+    // Hiển thị form đăng nhập
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    // Xử lý đăng nhập
+    public function login(Request $request)
+    {
+        $request->validate([
+            'role' => 'required|in:customer,owner',
+            'login' => 'required', // Email hoặc số điện thoại
+            'password' => 'required'
+        ]);
+
+        $credentials = [
+            'password' => $request->password,
+            'role' => $request->role
+        ];
+
+        if (filter_var($request->login, FILTER_VALIDATE_EMAIL)) {
+            $credentials['email'] = $request->login;
+        } else {
+            $credentials['phone'] = $request->login;
+        }
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('home');
+        }
+
+        return back()->withErrors(['login' => 'Thông tin đăng nhập không chính xác.']);
+    }
+
+    // Xử lý đăng xuất
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('home');
+    }
 }
+
