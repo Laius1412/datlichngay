@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Trang Chủ')
+@section("title", "Trang Chủ")
 
 @section('content')
     <!-- Nội dung chính của trang chủ sẽ được chèn vào đây -->
