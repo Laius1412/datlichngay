@@ -8,6 +8,13 @@
     <!-- Bootstrap & Font Awesome -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap CSS -->
+
+
 
     <style>
         /* Màu chủ đạo */
@@ -179,11 +186,11 @@
     <div class="sidebar">
         <div class="logo">LOGO</div>
         <ul class="menu">
-            <li><a href="{{ url('/') }}" class="text-light"><i class="fas fa-home"></i> Trang chủ</a></li>
+            <li><a href="{{ route('admin.dashboard') }}" class="text-light"><i class="fas fa-home"></i> Trang chủ</a></li>
             <li><a href="#"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
             <li><a href="#"><i class="fas fa-futbol"></i> Quản lý sân bóng</a>
                 <ul>
-                    <li><a href="#"><i class="fas fa-th-large"></i> Sân bóng</a></li>
+                <li><a href="{{ route('fields.index') }}"><i class="fas fa-th-large"></i> Sân bóng</a></li>
                     <li><a href="#"><i class="fas fa-dollar-sign"></i> Quản lý giá sân</a></li>
                 </ul>
             </li>
@@ -248,6 +255,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    @yield('content')
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @yield('scripts')
 </body>
 </htm>
