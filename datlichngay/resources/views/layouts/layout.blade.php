@@ -153,7 +153,7 @@
         <div class="logo">Logo</div>
         <div class="header-buttons">
             <button class="btn btn-light">Đăng Nhập</button>
-            <button class="btn btn-secondary">Đăng Ký</button>
+            <a href="{{ route('register') }}" class="btn btn-secondary">Đăng Ký</a>
         </div>
     </div>
 
@@ -161,7 +161,7 @@
     <div class="sidebar">
         <div class="logo">LOGO</div>
         <ul class="menu">
-            <li><a href="#"><i class="fas fa-home"></i> Trang chủ</a></li>
+            <li><a href="{{ route('welcome') }}" class="text-light"><i class="fas fa-home"></i> Trang chủ</a></li>
             <li><a href="#"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
             <li><a href="#"><i class="fas fa-futbol"></i> Danh sách sân</a></li>
             <li><a href="#"><i class="fas fa-calendar-alt"></i> Quản lý lịch đặt</a></li>
