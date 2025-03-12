@@ -191,7 +191,7 @@
             <li><a href="#"><i class="fas fa-futbol"></i> Quản lý sân bóng</a>
                 <ul>
                 <li><a href="{{ route('fields.index') }}"><i class="fas fa-th-large"></i> Sân bóng</a></li>
-                    <li><a href="#"><i class="fas fa-dollar-sign"></i> Quản lý giá sân</a></li>
+                    <li><a href="{{ route('prices.index') }}"><i class="fas fa-dollar-sign"></i> Quản lý giá sân</a></li>
                 </ul>
             </li>
             <li><a href="#"><i class="fas fa-calendar-alt"></i> Quản lý lịch đặt sân</a></li>
