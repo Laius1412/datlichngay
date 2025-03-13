@@ -45,7 +45,7 @@ Route::post('/profile/update', [ProfileController::class, 'update'])->name('prof
 
 Route::middleware(['auth'])->group(function () {
     // Route quản lý sân bóng
-    Route::get('/admin/fields', [FieldController::class, 'index'])->name('fields.index');
+    Route::get('/admin/fields', [FieldController::class, 'index'])->name('fields.index_admin');
     Route::get('/admin/fields/create', [FieldController::class, 'create'])->name('fields.create');
     Route::post('/admin/fields/store', [FieldController::class, 'store'])->name('fields.store');
     Route::get('/admin/fields/edit/{id}', [FieldController::class, 'edit'])->name('fields.edit');
