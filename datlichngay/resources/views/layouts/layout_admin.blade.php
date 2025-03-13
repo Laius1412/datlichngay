@@ -190,13 +190,13 @@
             <li><a href="{{ route('profile.edit') }}"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
             <li><a href="#"><i class="fas fa-futbol"></i> Quản lý sân bóng</a>
                 <ul>
-                <li><a href="{{ route('fields.index_admin') }}"><i class="fas fa-th-large"></i> Sân bóng</a></li>
-                    <li><a href="{{ route('prices.index') }}"><i class="fas fa-dollar-sign"></i> Quản lý giá sân</a></li>
+                <li><a href="{{ route('fields.index_admin') }}" class="text-light"><i class="fas fa-th-large"></i> Sân bóng</a></li>
+                    <li><a href="{{ route('prices.index') }}" class="text-light"><i class="fas fa-dollar-sign"></i> Quản lý giá sân</a></li>
                 </ul>
             </li>
-            <li><a href="#"><i class="fas fa-calendar-alt"></i> Quản lý lịch đặt sân</a></li>
-            <li><a href="{{ route('admin.customers') }}"><i class="fas fa-users"></i> Quản lý khách hàng</a></li>
-            <li><a href="#"><i class="fas fa-chart-bar"></i> Thống kê</a></li>
+            <li><a href="#" class="text-light"><i class="fas fa-calendar-alt"></i> Quản lý lịch đặt sân</a></li>
+            <li><a href="{{ route('admin.customers') }}" class="text-light"><i class="fas fa-users"></i> Quản lý khách hàng</a></li>
+            <li><a href="#"><i class="fas fa-chart-bar" class="text-light"></i> Thống kê</a></li>
         </ul>
     </div>
 

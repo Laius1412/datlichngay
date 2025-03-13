@@ -180,11 +180,11 @@
         <div class="logo">LOGO</div>
         <ul class="menu">
             <li><a href="{{ url('/') }}" class="text-light"><i class="fas fa-home"></i> Trang chủ</a></li>
-            <li><a href="{{ route('profile.edit_customer') }}"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+            <li><a href="{{ route('profile.edit_customer') }}" class="text-light"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
             <li><a href="{{ route('fields.index') }}" class="text-light"><i class="fas fa-futbol"></i> Danh sách sân</a></li>
-            <li><a href="#"><i class="fas fa-calendar-alt"></i> Quản lý lịch đặt</a></li>
-            <li><a href="#"><i class="fas fa-envelope"></i> Liên hệ</a></li>
-            <li><a href="#"><i class="fas fa-star"></i> Đánh giá</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt" class="text-light"></i> Quản lý lịch đặt</a></li>
+            <li><a href="#"><i class="fas fa-envelope" class="text-light"></i> Liên hệ</a></li>
+            <li><a href="#"><i class="fas fa-star" class="text-light"></i> Đánh giá</a></li>
         </ul>
     </div>
 
