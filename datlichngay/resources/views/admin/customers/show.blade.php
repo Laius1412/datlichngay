@@ -8,7 +8,7 @@
             <!-- Khu vực hiển thị ảnh đại diện -->
             <div class="col-md-4 text-center">
                 <div style="width: 150px; height: 150px; border: 2px solid #ccc; display: flex; align-items: center; justify-content: center; margin: auto; position: relative;">
-                    <img src="{{ asset($customer->avatar ?? 'default-avatar.png') }}" alt="Avatar" class="img-thumbnail" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="{{ asset('storage/avatars/' . ($customer->avatar ?? 'default-avatar.png')) }}" alt="Avatar" class="img-thumbnail" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <p class="mt-2">Avatar</p>
             </div>
