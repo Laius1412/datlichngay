@@ -44,7 +44,7 @@ class FieldController extends Controller
             }
         }
 
-        return redirect()->route('fields.index')->with('success', 'Sân bóng và các sân con được thêm thành công.');
+        return redirect()->route('fields.index_admin')->with('success', 'Sân bóng và các sân con được thêm thành công.');
     }
 
     public function edit($id)
@@ -83,7 +83,7 @@ class FieldController extends Controller
             }
         }
 
-        return redirect()->route('fields.index')->with('success', 'Sân bóng và các sân con được cập nhật thành công.');
+        return redirect()->route('fields.index_admin')->with('success', 'Sân bóng và các sân con được cập nhật thành công.');
     }
 
     public function destroy($id)
@@ -94,6 +94,6 @@ class FieldController extends Controller
         $field->subFields()->delete();
         $field->delete();
 
-        return redirect()->route('fields.index')->with('success', 'Sân bóng đã bị xóa.');
+        return redirect()->route('fields.index_admin')->with('success', 'Sân bóng đã bị xóa.');
     }
 }
