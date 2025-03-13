@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Field\FieldController;
 use App\Http\Controllers\Field\PriceController;
+use App\Http\Controllers\FieldsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -36,3 +37,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/prices/edit/{id}', [PriceController::class, 'edit'])->name('prices.edit');
     Route::post('/admin/prices/update/{id}', [PriceController::class, 'update'])->name('prices.update'); // Sử dụng POST
 });
+
+Route::get('/fields', [FieldsController::class, 'index'])->name('fields.index');
+Route::get('/fields/{id}', [FieldsController::class, 'show'])->name('fields.show');
