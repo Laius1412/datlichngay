@@ -187,7 +187,7 @@
         <div class="logo">LOGO</div>
         <ul class="menu">
             <li><a href="{{ route('admin.dashboard') }}" class="text-light"><i class="fas fa-home"></i> Trang chủ</a></li>
-            <li><a href="#"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+            <li><a href="{{ route('profile.edit') }}"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
             <li><a href="#"><i class="fas fa-futbol"></i> Quản lý sân bóng</a>
                 <ul>
                 <li><a href="{{ route('fields.index') }}"><i class="fas fa-th-large"></i> Sân bóng</a></li>
@@ -195,7 +195,7 @@
                 </ul>
             </li>
             <li><a href="#"><i class="fas fa-calendar-alt"></i> Quản lý lịch đặt sân</a></li>
-            <li><a href="#"><i class="fas fa-users"></i> Quản lý khách hàng</a></li>
+            <li><a href="{{ route('admin.customers') }}"><i class="fas fa-users"></i> Quản lý khách hàng</a></li>
             <li><a href="#"><i class="fas fa-chart-bar"></i> Thống kê</a></li>
         </ul>
     </div>
@@ -255,7 +255,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    @yield('content')
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
