@@ -14,10 +14,30 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit()
+    // Chỉnh sửa thông tin của chủ sân
+    public function editAdmin()
     {
         $user = Auth::user();
+        
+        // Kiểm tra nếu user không phải admin thì chặn lại
+        // if ($user->role !== 'admin') {
+        //     return redirect()->route('home')->with('error', 'Bạn không có quyền truy cập!');
+        // }
+
         return view('profile.edit', compact('user'));
+    }
+
+    // Chỉnh sửa thông tin của khách hàng
+    public function editCustomer()
+    {
+        $user = Auth::user();
+
+        // Kiểm tra nếu user không phải khách hàng thì chặn lại
+        if ($user->role !== 'customer') {
+            return redirect()->route('home')->with('error', 'Bạn không có quyền truy cập!');
+        }
+
+        return view('profile.edit_customer', compact('user'));
     }
 
     /**

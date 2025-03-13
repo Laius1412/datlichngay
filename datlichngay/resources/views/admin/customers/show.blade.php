@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Quản lí khách hàng</h2>
+    <h2 class="mb-4">Chi tiết khách hàng</h2>
     <div class="card p-4">
         <div class="row">
             <!-- Khu vực hiển thị ảnh đại diện -->

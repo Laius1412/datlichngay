@@ -29,8 +29,18 @@ Route::get('/admin/customers', [CustomerController::class, 'index'])
     Route::get('/admin', [CustomerController::class, 'index'])->name('admin.customers.index');
     Route::get('/admin/customers/{id}', [CustomerController::class, 'show'])->name('admin.customers.show');
     Route::delete('/admin/customers/{id}', [CustomerController::class, 'destroy'])->name('admin.customers.destroy');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Chỉnh sửa thông tin của chủ sân (admin)
+Route::get('/admin/profile', [ProfileController::class, 'editAdmin'])
+->name('profile.edit')
+->middleware('auth');
+
+// Chỉnh sửa thông tin của khách hàng
+Route::get('/customer/profile', [ProfileController::class, 'editCustomer'])
+->name('profile.edit_customer')
+->middleware('auth');
+
+// Cập nhật thông tin (chung cho cả admin và khách hàng)
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 
 Route::middleware(['auth'])->group(function () {
