@@ -12,7 +12,6 @@
                 <!-- Lọc loại sân -->
                 <select class="form-select w-25 me-1 h-100">
                     <option value="">Loại sân</option>
-                    <option value="5x5">5x5</option>
                     <option value="7x7">7x7</option>
                     <option value="9x9">9x9</option>
                     <option value="11x11">11x11</option>
