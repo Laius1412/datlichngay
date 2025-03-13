@@ -7,44 +7,47 @@
 
     <!-- Bảng danh sách giá sân -->
     <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Tên sân</th>
-                <th>Loại sân</th>
-                <th>Khung giờ</th>
-                <th>Giá</th>
-                <th>Tác vụ</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($subFields as $index => $subField)
-                @foreach($subField->prices as $priceIndex => $price)
-                    <tr>
-                        @if($priceIndex === 0)
-                            <td rowspan="{{ count($subField->prices) }}">{{ $index + 1 }}</td>
-                            <td rowspan="{{ count($subField->prices) }}">{{ $subField->field->name }}</td>
-                            <td rowspan="{{ count($subField->prices) }}">{{ $subField->type }}</td>
-                        @endif
-                        <td>{{ $price->start_time }} -> {{ $price->end_time }}</td>
-                        <td>{{ number_format($price->price, 0, ',', '.') }}K/ca</td>
-                        @if($priceIndex === 0)
-                            <td rowspan="{{ count($subField->prices) }}">
-                                <!-- Nút chỉnh sửa, mở modal -->
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPriceModal"
-                                    data-subfield-id="{{ $subField->id }}"
-                                    data-subfield-name="{{ $subField->field->name }}"
-                                    data-subfield-type="{{ $subField->type }}"
-                                    data-prices="{{ json_encode($subField->prices) }}">
-                                    Sửa
-                                </button>
-                            </td>
-                        @endif
-                    </tr>
-                @endforeach
+    <thead>
+        <tr>
+            <th onclick="sortTable()" style="cursor: pointer;">
+                Tên sân 
+                <span id="sortIcon">🔽</span> <!-- Biểu tượng sắp xếp -->
+            </th>
+            <th>Phần sân</th>
+            <th>Loại sân</th>
+            <th>Khung giờ</th>
+            <th>Giá</th>
+            <th>Tác vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($subFields as $index => $subField)
+            @foreach($subField->prices as $priceIndex => $price)
+                <tr>
+                    @if($priceIndex === 0)
+                        <td rowspan="{{ count($subField->prices) }}" class="field-name">{{ $subField->field->name }}</td>
+                        <td rowspan="{{ count($subField->prices) }}">{{ $subField->name }}</td>
+                        <td rowspan="{{ count($subField->prices) }}">{{ $subField->type }}</td>
+                    @endif
+                    <td>{{ $price->start_time }} -> {{ $price->end_time }}</td>
+                    <td>{{ number_format($price->price, 0, ',', '.') }}K/ca</td>
+                    @if($priceIndex === 0)
+                        <td rowspan="{{ count($subField->prices) }}">
+                            <!-- Nút chỉnh sửa, mở modal -->
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPriceModal"
+                                data-subfield-id="{{ $subField->id }}"
+                                data-subfield-name="{{ $subField->field->name }}"
+                                data-subfield-type="{{ $subField->type }}"
+                                data-prices="{{ json_encode($subField->prices) }}">
+                                Sửa
+                            </button>
+                        </td>
+                    @endif
+                </tr>
             @endforeach
-        </tbody>
-    </table>
+        @endforeach
+    </tbody>
+</table>
 
     <!-- Modal chỉnh sửa giá sân -->
     <div class="modal fade" id="editPriceModal" tabindex="-1" aria-labelledby="editPriceModalLabel" aria-hidden="true">
@@ -150,5 +153,29 @@
         // Cập nhật action của form
         document.getElementById('editPriceForm').action = `/admin/prices/update/${subFieldId}`;
     });
+    let sortAscending = true; // Mặc định sắp xếp tăng dần
+
+    function sortTable() {
+        let table = document.querySelector(".table"); // Chọn bảng
+        let rows = Array.from(table.querySelectorAll("tbody tr")); // Lấy tất cả hàng trong tbody
+        let tbody = table.querySelector("tbody");
+
+        // Sắp xếp các hàng dựa trên tên sân
+        rows.sort((a, b) => {
+            let nameA = a.querySelector("td.field-name").textContent.trim().toLowerCase();
+            let nameB = b.querySelector("td.field-name").textContent.trim().toLowerCase();
+            return sortAscending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+        });
+
+        sortAscending = !sortAscending; // Đảo trạng thái sắp xếp
+
+        // Cập nhật biểu tượng sắp xếp
+        document.getElementById("sortIcon").textContent = sortAscending ? "🔽" : "🔼";
+
+        // Gán lại các hàng đã sắp xếp vào tbody
+        tbody.innerHTML = "";
+        rows.forEach(row => tbody.appendChild(row));
+    }
+
 </script>
 @endsection

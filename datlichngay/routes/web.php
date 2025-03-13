@@ -8,6 +8,7 @@ use App\Http\Controllers\Field\PriceController;
 use App\Http\Controllers\FieldsController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BookingController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -61,3 +62,13 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/fields', [FieldsController::class, 'index'])->name('fields.index');
 Route::get('/fields/{id}', [FieldsController::class, 'show'])->name('fields.show');
+
+
+Route::get('/fields/{id}', [BookingController::class, 'showField'])->name('fields.show');
+Route::get('/fields/{id}/booking', [BookingController::class, 'showBookingPage'])->name('fields.booking');
+Route::post('/book-field', [BookingController::class, 'storeBooking'])->name('book.field');
+// routes/web.php
+Route::get('/payment/{booking}', [BookingController::class, 'showPayment'])->name('payment.show');
+Route::post('/payment/confirm/{booking}', [BookingController::class, 'confirmPayment'])->name('payment.confirm');
+
+
