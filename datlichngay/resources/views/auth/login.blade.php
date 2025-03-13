@@ -1,5 +1,7 @@
 @extends('layouts.layout')
 
+@section("title", "Đăng nhập")
+
 @section('content')
 <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
     <div class="card p-4" style="width: 350px;">
