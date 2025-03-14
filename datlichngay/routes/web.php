@@ -11,7 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BookingManagementController;
 use App\Http\Controllers\BookingDetailController;
-
+use App\Http\Controllers\AdminBookingController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -72,7 +72,12 @@ Route::post('/book-field', [BookingController::class, 'storeBooking'])->name('bo
 // routes/web.php
 Route::get('/payment/{booking}', [BookingController::class, 'showPayment'])->name('payment.show');
 Route::post('/payment/confirm/{booking}', [BookingController::class, 'confirmPayment'])->name('payment.confirm');
-
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('/bookings', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
+    Route::get('/bookings/{id}', [AdminBookingController::class, 'show'])->name('admin.bookings.show'); // Thêm dòng này
+    Route::post('/bookings/{id}/confirm', [AdminBookingController::class, 'confirm'])->name('admin.bookings.confirm');
+    Route::post('/bookings/{id}/cancel', [AdminBookingController::class, 'cancel'])->name('admin.bookings.cancel');
+});
 
 Route::get('/bookingsmanagement', [BookingManagementController::class, 'index'])->name('bookingsmanagement.index');
 Route::get('/bookingsmanagement/{id}', [BookingManagementController::class, 'show'])->name('bookingsmanagement.show');
