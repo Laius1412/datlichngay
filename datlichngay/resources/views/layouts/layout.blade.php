@@ -184,7 +184,7 @@
             <li><a href="{{ route('fields.index') }}" class="text-light"><i class="fas fa-futbol"></i> Danh sách sân</a></li>
             <li><a href="{{ route('bookingsmanagement.index') }}"><i class="fas fa-calendar-alt" class="text-light"></i> Quản lý lịch đặt</a></li>
             <li><a href="#"><i class="fas fa-envelope" class="text-light"></i> Liên hệ</a></li>
-            <li><a href="{{ route('bookingsmanagement.index') }}"><i class="fas fa-star" class="text-light"></i> Đánh giá</a></li>
+            <li><a href="#"><i class="fas fa-star" class="text-light"></i> Đánh giá</a></li>
         </ul>
     </div>
 
