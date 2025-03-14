@@ -9,6 +9,8 @@ use App\Http\Controllers\FieldsController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BookingManagementController;
+use App\Http\Controllers\BookingDetailController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -72,3 +74,6 @@ Route::get('/payment/{booking}', [BookingController::class, 'showPayment'])->nam
 Route::post('/payment/confirm/{booking}', [BookingController::class, 'confirmPayment'])->name('payment.confirm');
 
 
+Route::get('/bookingsmanagement', [BookingManagementController::class, 'index'])->name('bookingsmanagement.index');
+Route::get('/bookingsmanagement/{id}', [BookingManagementController::class, 'show'])->name('bookingsmanagement.show');
+Route::post('/bookingsmanagement/cancel/{id}', [BookingManagementController::class, 'cancel'])->name('bookingmanagement.cancel');
