@@ -29,7 +29,17 @@
                         @endphp
                         <td>
                             @if ($isBooked)
-                                ❌ <!-- Đã được đặt -->
+                                @php
+                                    $bookingStatus = $bookings[$subField->id]->where('start_time', $slot['start_time'])->first()->status;
+                                @endphp
+
+                                @if ($bookingStatus === 'pending')
+                                    ⏳ <!-- Icon cho trạng thái pending -->
+                                @elseif ($bookingStatus === 'confirmed')
+                                    ✅ <!-- Icon cho trạng thái confirmed -->
+                                @else
+                                    ❌ <!-- Icon mặc định cho các trạng thái khác -->
+                                @endif
                             @else
                                 @if ($price == 0)
                                     ⛔ <!-- Không được đặt vì giá là 0đ -->

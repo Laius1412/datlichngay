@@ -76,34 +76,34 @@ class BookingController extends Controller
         return redirect()->route('payment.show', $booking);
     }
 // app/Http/Controllers/BookingController.php
-public function showPayment(Request $request, $subFieldId)
-{
-    // Lấy thông tin từ query string
-    $date = $request->query('date');
-    $startTime = $request->query('start_time');
-    $endTime = $request->query('end_time');
-    $price = $request->query('price');
+    public function showPayment(Request $request, $subFieldId)
+    {
+        // Lấy thông tin từ query string
+        $date = $request->query('date');
+        $startTime = $request->query('start_time');
+        $endTime = $request->query('end_time');
+        $price = $request->query('price');
 
-    // Lấy thông tin sân
-    $subField = SubField::findOrFail($subFieldId);
+        // Lấy thông tin sân
+        $subField = SubField::findOrFail($subFieldId);
 
-    // Hiển thị trang thanh toán
-    return view('fields.payment', compact('subField', 'date', 'startTime', 'endTime', 'price'));
-}
+        // Hiển thị trang thanh toán
+        return view('fields.payment', compact('subField', 'date', 'startTime', 'endTime', 'price'));
+    }
 
-public function confirmPayment(Request $request, $subFieldId)
-{
-    // Xác nhận thanh toán và lưu vào CSDL
-    $booking = Booking::create([
-        'user_id' => auth()->id(),
-        'sub_field_id' => $subFieldId,
-        'date' => $request->date,
-        'start_time' => $request->start_time,
-        'end_time' => $request->end_time,
-        'price' => $request->price,
-        'status' => 'confirmed', // Trạng thái thanh toán thành công
-    ]);
+    public function confirmPayment(Request $request, $subFieldId)
+    {
+        // Xác nhận thanh toán và lưu vào CSDL
+        $booking = Booking::create([
+            'user_id' => auth()->id(),
+            'sub_field_id' => $subFieldId,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'price' => $request->price,
+            'status' => 'pending', // Trạng thái thanh toán thành công
+        ]);
 
-    return redirect()->route('payment.show', $subFieldId)->with('success', 'Thanh toán thành công!');
-}
+        return redirect()->route('payment.show', $subFieldId)->with('success', 'Thanh toán thành công!');
+    }
 }
