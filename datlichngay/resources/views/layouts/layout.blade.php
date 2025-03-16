@@ -205,7 +205,6 @@
             <h5>Các chính sách và điều khoản</h5>
             <p>🔒 Chính sách bảo mật</p>
             <p>📜 Điều khoản sử dụng</p>
-            <p>Hello</p>
         </div>
     </footer>
 
