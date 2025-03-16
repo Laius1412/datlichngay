@@ -57,7 +57,7 @@ class FieldController extends Controller
     public function update(Request $request, $id)
     {
         $field = Field::findOrFail($id);
-
+    
         $request->validate([
             'name' => 'required|string',
             'location' => 'required|string',
@@ -69,22 +69,23 @@ class FieldController extends Controller
             'sub_fields.*.type' => 'required_with:sub_fields|string',
             'sub_fields.*.status' => 'required_with:sub_fields|string',
         ]);
-
-        // Cập nhật sân chính
+    
+        // Cập nhật thông tin sân chính
         $field->update($request->only(['name', 'location', 'ward', 'district', 'city']));
-
-        // Cập nhật hoặc tạo mới sub-fields
+    
+        // Xóa tất cả sub-fields cũ
+        $field->subFields()->delete();
+    
+        // Thêm lại các sub-fields mới
         if ($request->has('sub_fields')) {
             foreach ($request->sub_fields as $subFieldData) {
-                SubField::updateOrCreate(
-                    ['field_id' => $field->id, 'name' => $subFieldData['name']],
-                    $subFieldData
-                );
+                $field->subFields()->create($subFieldData);
             }
         }
-
-        return redirect()->route('fields.index_admin')->with('success', 'Sân bóng và các sân con được cập nhật thành công.');
+    
+        return redirect()->route('fields.index_admin')->with('success', 'Sân bóng và các sân con đã được cập nhật thành công.');
     }
+    
 
     public function destroy($id)
     {
